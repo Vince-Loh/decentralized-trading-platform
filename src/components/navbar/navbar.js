@@ -22,7 +22,7 @@ class Navbar extends Component {
     return (
       <nav className="Navbaritems">
         <h1 className="logo">
-          <Link to="/home" style={{ textDecoration: 'none' }}> GRP21  <CameraRoundedIcon className="camera-rounded" style={{ verticalAlign: 'middle'}} /> </Link>
+          GRP21 <Link to="/home" style={{ textDecoration: 'none' }}>   <CameraRoundedIcon className="camera-rounded" style={{ verticalAlign: 'middle', color: '#2B86C5'}} /> </Link>
         </h1>
 
          <div className="menu-icons" onClick={this.handleClick}>
