@@ -2,7 +2,6 @@ import "./homestyles.css";
 import { Link } from 'react-router-dom';
 import React from 'react';
 import blockchainImage from './blockchain_2.jpg';
-import { colors } from "@mui/material";
 
 function Home() {
     return (
