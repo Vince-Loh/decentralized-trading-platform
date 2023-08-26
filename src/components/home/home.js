@@ -23,6 +23,9 @@ function Home() {
                         </Link>
                     </div>
                 </Grid>
+                <Grid item xs={9} sm={6} alignItems="center" justifyContent="center">
+                    <img src={blockchainImage} alt="Blockchain" className="imgBlockchain" />
+                </Grid>
             </Grid>
         </div>
     );

@@ -39,6 +39,7 @@ h2{
     height: auto;
     margin-top: 2rem;
     box-shadow: 0 5px 15px rgba(0, 0, 0, 0.616);
+    left: -10%;
 }
 #discover{
     color: #222;
