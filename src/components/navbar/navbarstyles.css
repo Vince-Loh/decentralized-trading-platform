@@ -15,6 +15,7 @@
     top: 20px;
     left: 50%;
     transform: translate(-50%);
+    z-index: 99;
   }
 
 *{
@@ -26,7 +27,7 @@
 }
   
 .logo{
-    color: rgb(80, 80, 238) ;
+    color: #2B86C5 ;
     justify-self: start;
     cursor: pointer;
 }
