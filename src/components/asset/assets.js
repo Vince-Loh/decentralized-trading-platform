@@ -5,13 +5,7 @@ import Box from '@mui/material/Box';
 import Paper from '@mui/material/Paper';
 import Grid from '@mui/material/Grid';
 import AssetDisplay from './assetdisplay.js'
-import BitcoinImg from './1.png';
-import EthereumImg from './2.png';
-import LitecoinImg from './3.png';
-import UsdtImg from './6.png';
-import BinanceImg from './10.png';
-import PolkadotImg from './12.png';
-import CronosImg from './15.png';
+import * as images from '../images/images';
 import Divider from '@mui/material/Divider';
 import Typography from '@mui/material/Typography';
 
@@ -48,151 +42,31 @@ function Assets() {
         <Box sx={{ flexGrow: 1 }} style={{paddingTop:'3vh', paddingBottom: '10vh', paddingLeft:32, paddingRight:16, backgroundColor: '#222'}}>
             <Grid container spacing={2}>
                 <Grid item xs={12} md={12}>
-                    <Item ><h1>View our available digital currencies.</h1></Item>
+                    <Item ><h1>View our available items.</h1></Item>
                 </Grid>
-                <Grid item xs={6} md={4} lg={3} xl={2}>
-                    <AssetDisplay id = '1' item='Bitcoin' img={BitcoinImg} description='Buy Bitcoin' price='$30,000'/>
+                <Grid item xs={6} sm={12} md={6} lg={4} xl={3}>
+                    <AssetDisplay isbn = '1' title='Sword of Destiny' img={images.TW_SOD} author='Andrzej Sapkowski' price='$20'/>
                 </Grid>
-                <Grid item xs={6} md={4} lg={3} xl={2}>
-                    <AssetDisplay id = '2' item='Ethereum' img={EthereumImg} description='Buy Ethereum' price='$5,000'/>
+                <Grid item xs={6} sm={12} md={6} lg={4} xl={3}>
+                    <AssetDisplay isbn = '2' title='The Last Wish' img={images.TW_TLW} author='Andrzej Sapkowski' price='$20'/>
                 </Grid>
-                <Grid item xs={6} md={4} lg={3} xl={2}>
-                    <AssetDisplay id = '3' item='Litecoin' img={LitecoinImg} description='Buy Litecoin' price='$400'/>
+                <Grid item xs={6} sm={12} md={6} lg={4} xl={3}>
+                    <AssetDisplay isbn = '3' title='Blood of Elves' img={images.TW_BOE} author='Andrzej Sapkowski' price='$20'/>
                 </Grid>
-                <Grid item xs={6} md={4} lg={3} xl={2}>
-                    <AssetDisplay id = '4' item='USD Tether' img={UsdtImg} description='Buy USD Tether' price='$1'/>
+                <Grid item xs={6} sm={12} md={6} lg={4} xl={3}>
+                    <AssetDisplay isbn = '4' title='Time of Contempt' img={images.TW_TOC} author='Andrzej Sapkowski' price='$20'/>
                 </Grid>
-                <Grid item xs={6} md={4} lg={3} xl={2}>
-                    <AssetDisplay id = '5' item='Binance Coin' img={BinanceImg} description='Buy Binance Coin' price='$250'/>
+                <Grid item xs={6} sm={12} md={6} lg={4} xl={3}>
+                    <AssetDisplay isbn = '5' title='Baptism of Fire' img={images.TW_BOF} author='Andrzej Sapkowski' price='$20'/>
                 </Grid>
-                <Grid item xs={6} md={4} lg={3} xl={2}>
-                    <AssetDisplay id = '6' item='Polkadot' img={PolkadotImg} description='Buy Polkadot' price='$50'/>
+                <Grid item xs={6} sm={12} md={6} lg={4} xl={3}>
+                    <AssetDisplay isbn = '6' title='The Tower of the Swallow' img={images.TW_TTOTS} author='Andrzej Sapkowski' price='$20'/>
                 </Grid>
-                <Grid item xs={6} md={4} lg={3} xl={2}>
-                    <AssetDisplay id = '7' item='Cronos' img={CronosImg} description='Buy Cronos' price='$23'/>
+                <Grid item xs={6} sm={12} md={6} lg={4} xl={3}>
+                    <AssetDisplay isbn = '7' title='The Lady of the Lake' img={images.TW_TLOTL} author='Andrzej Sapkowski' price='$20'/>
                 </Grid>
-                <Grid item xs={6} md={4} lg={3} xl={2}>
-                    <AssetDisplay id = '2' item='Ethereum' img={EthereumImg} description='Buy Ethereum' price='$5,000'/>
-                </Grid>
-                <Grid item xs={6} md={4} lg={3} xl={2}>
-                    <AssetDisplay id = '1' item='Bitcoin' img={BitcoinImg} description='Buy Bitcoin' price='$30,000'/>
-                </Grid>
-                <Grid item xs={6} md={4} lg={3} xl={2}>
-                    <AssetDisplay id = '2' item='Ethereum' img={EthereumImg} description='Buy Ethereum' price='$5,000'/>
-                </Grid>
-                <Grid item xs={6} md={4} lg={3} xl={2}>
-                    <AssetDisplay id = '3' item='Litecoin' img={LitecoinImg} description='Buy Litecoin' price='$400'/>
-                </Grid>
-                <Grid item xs={6} md={4} lg={3} xl={2}>
-                    <AssetDisplay id = '4' item='USD Tether' img={UsdtImg} description='Buy USD Tether' price='$1'/>
-                </Grid>
-                <Grid item xs={6} md={4} lg={3} xl={2}>
-                    <AssetDisplay id = '5' item='Binance Coin' img={BinanceImg} description='Buy Binance Coin' price='$250'/>
-                </Grid>
-                <Grid item xs={6} md={4} lg={3} xl={2}>
-                    <AssetDisplay id = '6' item='Polkadot' img={PolkadotImg} description='Buy Polkadot' price='$50'/>
-                </Grid>
-                <Grid item xs={6} md={4} lg={3} xl={2}>
-                    <AssetDisplay id = '7' item='Cronos' img={CronosImg} description='Buy Cronos' price='$23'/>
-                </Grid>
-                <Grid item xs={6} md={4} lg={3} xl={2}>
-                    <AssetDisplay id = '2' item='Ethereum' img={EthereumImg} description='Buy Ethereum' price='$5,000'/>
-                </Grid>
-                <Grid item xs={6} md={4} lg={3} xl={2}>
-                    <AssetDisplay id = '1' item='Bitcoin' img={BitcoinImg} description='Buy Bitcoin' price='$30,000'/>
-                </Grid>
-                <Grid item xs={6} md={4} lg={3} xl={2}>
-                    <AssetDisplay id = '2' item='Ethereum' img={EthereumImg} description='Buy Ethereum' price='$5,000'/>
-                </Grid>
-                <Grid item xs={6} md={4} lg={3} xl={2}>
-                    <AssetDisplay id = '3' item='Litecoin' img={LitecoinImg} description='Buy Litecoin' price='$400'/>
-                </Grid>
-                <Grid item xs={6} md={4} lg={3} xl={2}>
-                    <AssetDisplay id = '4' item='USD Tether' img={UsdtImg} description='Buy USD Tether' price='$1'/>
-                </Grid>
-                <Grid item xs={6} md={4} lg={3} xl={2}>
-                    <AssetDisplay id = '5' item='Binance Coin' img={BinanceImg} description='Buy Binance Coin' price='$250'/>
-                </Grid>
-                <Grid item xs={6} md={4} lg={3} xl={2}>
-                    <AssetDisplay id = '6' item='Polkadot' img={PolkadotImg} description='Buy Polkadot' price='$50'/>
-                </Grid>
-                <Grid item xs={6} md={4} lg={3} xl={2}>
-                    <AssetDisplay id = '7' item='Cronos' img={CronosImg} description='Buy Cronos' price='$23'/>
-                </Grid>
-                <Grid item xs={6} md={4} lg={3} xl={2}>
-                    <AssetDisplay id = '2' item='Ethereum' img={EthereumImg} description='Buy Ethereum' price='$5,000'/>
-                </Grid>
-                <Grid item xs={6} md={4} lg={3} xl={2}>
-                    <AssetDisplay id = '1' item='Bitcoin' img={BitcoinImg} description='Buy Bitcoin' price='$30,000'/>
-                </Grid>
-                <Grid item xs={6} md={4} lg={3} xl={2}>
-                    <AssetDisplay id = '2' item='Ethereum' img={EthereumImg} description='Buy Ethereum' price='$5,000'/>
-                </Grid>
-                <Grid item xs={6} md={4} lg={3} xl={2}>
-                    <AssetDisplay id = '3' item='Litecoin' img={LitecoinImg} description='Buy Litecoin' price='$400'/>
-                </Grid>
-                <Grid item xs={6} md={4} lg={3} xl={2}>
-                    <AssetDisplay id = '4' item='USD Tether' img={UsdtImg} description='Buy USD Tether' price='$1'/>
-                </Grid>
-                <Grid item xs={6} md={4} lg={3} xl={2}>
-                    <AssetDisplay id = '5' item='Binance Coin' img={BinanceImg} description='Buy Binance Coin' price='$250'/>
-                </Grid>
-                <Grid item xs={6} md={4} lg={3} xl={2}>
-                    <AssetDisplay id = '6' item='Polkadot' img={PolkadotImg} description='Buy Polkadot' price='$50'/>
-                </Grid>
-                <Grid item xs={6} md={4} lg={3} xl={2}>
-                    <AssetDisplay id = '7' item='Cronos' img={CronosImg} description='Buy Cronos' price='$23'/>
-                </Grid>
-                <Grid item xs={6} md={4} lg={3} xl={2}>
-                    <AssetDisplay id = '2' item='Ethereum' img={EthereumImg} description='Buy Ethereum' price='$5,000'/>
-                </Grid>
-                <Grid item xs={6} md={4} lg={3} xl={2}>
-                    <AssetDisplay id = '1' item='Bitcoin' img={BitcoinImg} description='Buy Bitcoin' price='$30,000'/>
-                </Grid>
-                <Grid item xs={6} md={4} lg={3} xl={2}>
-                    <AssetDisplay id = '2' item='Ethereum' img={EthereumImg} description='Buy Ethereum' price='$5,000'/>
-                </Grid>
-                <Grid item xs={6} md={4} lg={3} xl={2}>
-                    <AssetDisplay id = '3' item='Litecoin' img={LitecoinImg} description='Buy Litecoin' price='$400'/>
-                </Grid>
-                <Grid item xs={6} md={4} lg={3} xl={2}>
-                    <AssetDisplay id = '4' item='USD Tether' img={UsdtImg} description='Buy USD Tether' price='$1'/>
-                </Grid>
-                <Grid item xs={6} md={4} lg={3} xl={2}>
-                    <AssetDisplay id = '5' item='Binance Coin' img={BinanceImg} description='Buy Binance Coin' price='$250'/>
-                </Grid>
-                <Grid item xs={6} md={4} lg={3} xl={2}>
-                    <AssetDisplay id = '6' item='Polkadot' img={PolkadotImg} description='Buy Polkadot' price='$50'/>
-                </Grid>
-                <Grid item xs={6} md={4} lg={3} xl={2}>
-                    <AssetDisplay id = '7' item='Cronos' img={CronosImg} description='Buy Cronos' price='$23'/>
-                </Grid>
-                <Grid item xs={6} md={4} lg={3} xl={2}>
-                    <AssetDisplay id = '2' item='Ethereum' img={EthereumImg} description='Buy Ethereum' price='$5,000'/>
-                </Grid>
-                <Grid item xs={6} md={4} lg={3} xl={2}>
-                    <AssetDisplay id = '1' item='Bitcoin' img={BitcoinImg} description='Buy Bitcoin' price='$30,000'/>
-                </Grid>
-                <Grid item xs={6} md={4} lg={3} xl={2}>
-                    <AssetDisplay id = '2' item='Ethereum' img={EthereumImg} description='Buy Ethereum' price='$5,000'/>
-                </Grid>
-                <Grid item xs={6} md={4} lg={3} xl={2}>
-                    <AssetDisplay id = '3' item='Litecoin' img={LitecoinImg} description='Buy Litecoin' price='$400'/>
-                </Grid>
-                <Grid item xs={6} md={4} lg={3} xl={2}>
-                    <AssetDisplay id = '4' item='USD Tether' img={UsdtImg} description='Buy USD Tether' price='$1'/>
-                </Grid>
-                <Grid item xs={6} md={4} lg={3} xl={2}>
-                    <AssetDisplay id = '5' item='Binance Coin' img={BinanceImg} description='Buy Binance Coin' price='$250'/>
-                </Grid>
-                <Grid item xs={6} md={4} lg={3} xl={2}>
-                    <AssetDisplay id = '6' item='Polkadot' img={PolkadotImg} description='Buy Polkadot' price='$50'/>
-                </Grid>
-                <Grid item xs={6} md={4} lg={3} xl={2}>
-                    <AssetDisplay id = '7' item='Cronos' img={CronosImg} description='Buy Cronos' price='$23'/>
-                </Grid>
-                <Grid item xs={6} md={4} lg={3} xl={2}>
-                    <AssetDisplay id = '2' item='Ethereum' img={EthereumImg} description='Buy Ethereum' price='$5,000'/>
+                <Grid item xs={6} sm={12} md={6} lg={4} xl={3}>
+                    <AssetDisplay isbn = '8' title='Season of Storms' img={images.TW_SOS} author='Andrzej Sapkowski' price='$20'/>
                 </Grid>
             </Grid>
         </Box>

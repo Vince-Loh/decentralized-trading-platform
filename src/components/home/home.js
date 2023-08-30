@@ -1,14 +1,8 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { Grid, Button } from '@mui/material';
-import blockchainImage from './blockchain_2.jpg';
 import './homestyles.css';
-import Bitcoin3D from './1.png';
-import Ethereum3D from './2.png';
-import Cronos3D from './15.png';
-import Litecoin3D from './3.png';
-import USDT3D from './6.png';
-import Polkadot3D from './12.png';
+import * as images from '../images/images';
 
 function Home() {
     return (
@@ -30,7 +24,7 @@ function Home() {
                     </div>
                 </Grid>
                 <Grid item xs={9} sm={6} alignItems="center" justifyContent="center">
-                    <img src={blockchainImage} alt="Blockchain" className="imgBlockchain" />
+                    <img src={images.BlockchainImg} alt="Blockchain" className="imgBlockchain" />
                 </Grid>
             </Grid>
             <Grid container spacing={5} alignItems="center" justifyContent="center" style={{ backgroundColor: '#222'}}>
@@ -42,21 +36,21 @@ function Home() {
                         <Grid container spacing={4}>
                             <Grid item xs={12} sm={4}>
                                 <div className="coin-container">
-                                    <img src={Bitcoin3D} alt="Bitcoin" className="coin-image"/>
+                                    <img src={images.BitcoinImg} alt="Bitcoin" className="coin-image"/>
                                     <p className='coinName'>Bitcoin</p>
                                 </div>
                             </Grid>
 
                             <Grid item xs={12} sm={4}>
                                 <div className="coin-container">
-                                    <img src={Ethereum3D} alt="Ethereum" className="coin-image"/>
+                                    <img src={images.EthereumImg} alt="Ethereum" className="coin-image"/>
                                     <p className='coinName'>Ethereum</p>
                                 </div>
                             </Grid>
 
                             <Grid item xs={12} sm={4}>
                                 <div className="coin-container">
-                                    <img src={Cronos3D} alt="Cronos" className="coin-image"/>
+                                    <img src={images.CronosImg} alt="Cronos" className="coin-image"/>
                                     <p className='coinName'>Cronos</p>
                                 </div>
                             </Grid>
@@ -64,21 +58,21 @@ function Home() {
                         <Grid container spacing={4}>
                             <Grid item xs={12} sm={4}>
                                 <div className="coin-container">
-                                    <img src={Litecoin3D} alt="Litecoin" className="coin-image"/>
+                                    <img src={images.LitecoinImg} alt="Litecoin" className="coin-image"/>
                                     <p className='coinName'>Litecoin</p>
                                 </div>
                             </Grid>
 
                             <Grid item xs={12} sm={4}>
                                 <div className="coin-container">
-                                    <img src={USDT3D} alt="USDT" className="coin-image"/>
+                                    <img src={images.UsdtImg} alt="USDT" className="coin-image"/>
                                     <p className='coinName'>USDT</p>
                                 </div>
                             </Grid>
 
                             <Grid item xs={12} sm={4}>
                                 <div className="coin-container">
-                                    <img src={Polkadot3D} alt="Polkadot" className="coin-image"/>
+                                    <img src={images.PolkadotImg} alt="Polkadot" className="coin-image"/>
                                     <p className='coinName'>Polkadot</p>
                                 </div>
                             </Grid>

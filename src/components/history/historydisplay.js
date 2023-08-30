@@ -4,7 +4,8 @@ import Grid from '@mui/material/Grid';
 import Paper from '@mui/material/Paper';
 import Typography from '@mui/material/Typography';
 import ButtonBase from '@mui/material/ButtonBase';
-import "./assetstyles.css"
+import "./historystyles.css"
+
 
 const Img = styled('img')({
   margin: 'auto',
@@ -13,7 +14,7 @@ const Img = styled('img')({
   maxHeight: '100%',
 });
 
-export default function AssetDisplay(props) {
+export default function HistoryDisplay(props) {
   return (
     <Paper
       sx={{
@@ -35,25 +36,26 @@ export default function AssetDisplay(props) {
         <Grid item xs={12} sm container>
           <Grid item xs container direction="column" spacing={2}>
             <Grid item xs>
-              <Typography gutterBottom variant="subtitle1" component="div" className="asset-title">
+              <Typography gutterBottom variant="subtitle1" component="div">
                 {props.title}
               </Typography>
               <Typography variant="body2" gutterBottom>
                 Author: {props.author}
               </Typography>
-              <Typography variant="body2" color="text.secondary" className="asset-id">
+              <Typography variant="body2" gutterBottom>
                 ISBN: {props.isbn}
               </Typography>
-            </Grid>
-            <Grid item>
-              <Typography sx={{ cursor: 'pointer' }} variant="body2" className="asset-purchase-btn">
-                Purchase for {props.price}
+              <Typography variant="body2" gutterBottom>
+                Purchased by: {props.user}
+              </Typography>
+              <Typography variant="body2" color="text.secondary">
+                Purchased for: {props.purchasePrice}
               </Typography>
             </Grid>
           </Grid>
           <Grid item>
-            <Typography className="asset-price" variant="subtitle1" component="div">
-              {props.price}
+            <Typography variant="subtitle1" component="div">
+              {props.timeStamp}
             </Typography>
           </Grid>
         </Grid>
