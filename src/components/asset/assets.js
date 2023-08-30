@@ -8,6 +8,9 @@ import AssetDisplay from './assetdisplay.js'
 import * as images from '../images/images';
 import Divider from '@mui/material/Divider';
 import Typography from '@mui/material/Typography';
+import { useState } from 'react';
+import { FormControl, InputLabel, MenuItem, Select } from '@mui/material';
+
 
 
 const Item = styled(Paper)(({ theme }) => ({
@@ -18,10 +21,42 @@ const Item = styled(Paper)(({ theme }) => ({
     padding: theme.spacing(1),
     textAlign: 'center',
   }));
-  
 
 function Assets() {
-    return (<>
+
+const [searchTerm, setSearchTerm] = useState('');
+const [selectedCategory, setSelectedCategory] = useState('');
+const [selectedAuthor, setSelectedAuthor] = useState('');
+
+const assets = [
+  { isbn: '1', category: 'Fiction', title: 'Season of Storms', author: 'Andrzej Sapkowski', price: '$20', img: [images.TW_SOS]},
+  { isbn : '2', category: 'Fiction', title: 'The Last Wish', author: 'Andrzej Sapkowski', price: '$20', img: [images.TW_TLW]},
+    { isbn : '3', category: 'Fiction', title: 'Blood of Elves', author: 'Andrzej Sapkowski', price: '$20', img: [images.TW_BOE]},
+    { isbn : '4', category: 'Fiction', title: 'Time of Contempt', author: 'Andrzej Sapkowski', price: '$20', img: [images.TW_TOC]},
+    { isbn : '5', category: 'Fiction', title: 'Baptism of Fire', author: 'Andrzej Sapkowski', price: '$20', img: [images.TW_BOF]},
+    { isbn : '6', category: 'Fiction', title: 'The Tower of the Swallow', author: 'Andrzej Sapkowski', price: '$20', img: [images.TW_TTOTS]},
+    { isbn : '7', category: 'Fiction', title: 'The Lady of the Lake', author: 'Andrzej Sapkowski', price: '$20', img: [images.TW_TLOTL]},
+    { isbn : '8', category: 'Fiction', title: 'Season of Storms', author: 'Andrzej Sapkowski', price: '$20', img:  [images.TW_SOD]},
+];
+
+const filteredAssets = assets.filter(asset => {
+  return (
+    asset.title.toLowerCase().includes(searchTerm.toLowerCase()) &&
+    (selectedCategory === '' || asset.category === selectedCategory)
+  );
+});
+
+<div className="search-filter">
+  <input type="text" placeholder="Search by Title" value={searchTerm} onChange={e => setSearchTerm(e.target.value)} />
+  <select value={selectedCategory} onChange={e => setSelectedCategory(e.target.value)}>
+    <option value="">All Categories</option>
+    <option value="Fiction">Fiction</option>
+    <option value="Non-Fiction">Non-Fiction</option>
+    <option value="Non-Fiction">Technology</option>
+  </select>
+</div>
+
+return (<>
     <div className = 'asset-container'>
             <Grid container spacing={0} alignItems="center" justifyContent="center">
                 <Grid item xs={12} sm={6}>
@@ -41,36 +76,60 @@ function Assets() {
              </Grid>
             </Grid>
         <Box sx={{ flexGrow: 1 }} style={{height: 'auto', overflowY: 'auto', paddingTop:'6vh', paddingBottom: '10vh', paddingLeft:32, paddingRight:16, backgroundColor: '#222'}}>
-            <Grid container spacing={2}>
-                <Grid item xs={12} md={12} style={{marginBottom: '2rem'}}>
-                    <Item ><h1>View our available items.</h1></Item>
+            <Grid container spacing={0} className="items-title">
+                <Grid item xs={12} md={12}>
+                    <Item className="items-title"><h1>View our available items.</h1></Item>
                 </Grid>
-                <Grid item xs={12} sm={12} lg={3} xl={3} style={{marginBottom: '2rem', paddingTop:'6vh'}}>
-                    <AssetDisplay isbn = '1' category='Fiction' title='Sword of Destiny' img={images.TW_SOD} author='Andrzej Sapkowski' price='$20'/>
                 </Grid>
-                <Grid item xs={12} sm={12} lg={3} xl={3} style={{marginBottom: '2rem', paddingTop:'6vh'}}>
-                    <AssetDisplay isbn = '2' category='Fiction'title='The Last Wish' img={images.TW_TLW} author='Andrzej Sapkowski' price='$20'/>
+                <div className="search-filter-container">
+                    <Grid container spacing={2}>
+                        <Grid item xs={12} md={12} lg ={12} >
+                        <input
+                            type="text" 
+                            placeholder="Search..." 
+                            value={searchTerm}
+                            onChange={(e) => setSearchTerm(e.target.value)}
+                        />
+                        </Grid>
+                    
+                <Grid container spacing={2}>
+                        <Grid item xs={6} md={6} >
+                        <FormControl fullWidth className="form-assets">
+                            <InputLabel className="white-text-center">Category</InputLabel>
+                            <Select
+                            value={selectedCategory}
+                            className="white-text-center"
+                            onChange={(e) => setSelectedCategory(e.target.value)}
+                            >
+                            <MenuItem value=""><em>None</em></MenuItem>
+                            <MenuItem value="Fiction">Fiction</MenuItem>
+                            <MenuItem value="Non-Fiction">Non-Fiction</MenuItem>
+                            </Select>
+                        </FormControl>
+                        </Grid>
+                        <Grid item xs={6} md ={6} style={{marginBottom: '2rem'}}>
+                        <FormControl fullWidth className="form-assets">
+                            <InputLabel className="white-text-center">Author</InputLabel>
+                            <Select
+                            value={selectedAuthor}
+                            className="white-text-center"
+                            onChange={(e) => setSelectedAuthor(e.target.value)}
+                            >
+                                <MenuItem value=""><em>None</em></MenuItem>
+                                <MenuItem value="Andrzej Sapkowski">Andrzej Sapkowski</MenuItem>
+                            </Select>
+                        </FormControl>
+                        </Grid>
+                        {filteredAssets.map((asset, index) => (
+                            <Grid item xs={12} sm={12} lg={3} xl={3} style={{marginBottom: '2rem', paddingTop:'6vh'}}>
+                            <AssetDisplay key={index} {...asset} />
+                        </Grid>
+                        ))}
+                        </Grid>
                 </Grid>
-                <Grid item xs={12} sm={12} xl={3} style={{marginBottom: '2rem', paddingTop:'6vh'}}>
-                    <AssetDisplay isbn = '3' category='Fiction' title='Blood of Elves' img={images.TW_BOE} author='Andrzej Sapkowski' price='$20'/>
-                </Grid>
-                <Grid item xs={12} sm={12} xl={3} style={{marginBottom: '2rem', paddingTop:'6vh'}}>
-                    <AssetDisplay isbn = '4' category='Fiction' title='Time of Contempt' img={images.TW_TOC} author='Andrzej Sapkowski' price='$20'/>
-                </Grid>
-                <Grid item xs={12} sm={12} xl={3} style={{marginBottom: '2rem', paddingTop:'6vh'}}>
-                    <AssetDisplay isbn = '5' category='Fiction' title='Baptism of Fire' img={images.TW_BOF} author='Andrzej Sapkowski' price='$20'/>
-                </Grid>
-                <Grid item xs={12} sm={12} xl={3} style={{marginBottom: '2rem', paddingTop:'6vh'}}>
-                    <AssetDisplay isbn = '6' category='Fiction' title='The Tower of the Swallow' img={images.TW_TTOTS} author='Andrzej Sapkowski' price='$20'/>
-                </Grid>
-                <Grid item xs={12} sm={12} xl={3} style={{marginBottom: '2rem', paddingTop:'6vh'}}>
-                    <AssetDisplay isbn = '7' category='Fiction' title='The Lady of the Lake' img={images.TW_TLOTL} author='Andrzej Sapkowski' price='$20'/>
-                </Grid>
-                <Grid item xs={12} sm={12} xl={3} style={{marginBottom: '2rem', paddingTop:'6vh'}}>
-                    <AssetDisplay isbn = '8' category='Fiction' title='Season of Storms' img={images.TW_SOS} author='Andrzej Sapkowski' price='$20'/>
-                </Grid>
-            </Grid>
+                </div>
         </Box>
+        
     </div>
     </>
     );

@@ -17,7 +17,7 @@ function Home() {
                             </span>
                         </h2>
                         <Link to="/assets" style={{ textDecoration: 'none'}}>
-                            <Button variant="contained" color="primary">
+                            <Button variant="contained" color="primary" >
                                 Get Started
                             </Button>
                         </Link>
@@ -79,7 +79,7 @@ function Home() {
                         </Grid>
                         <div style={{ display: 'flex', justifyContent: 'center', marginTop: '2rem' }}>
                         <Link to="/assets" style={{ textDecoration: 'none' }}>
-                            <Button variant="contained" color="primary" style={{marginBottom: '2.5rem'}}>
+                            <Button variant="contained" color="primary" style={{marginBottom: '2.5rem', zIndex: '0'}}>
                                 Explore Store
                             </Button>
                         </Link>

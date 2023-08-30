@@ -23,6 +23,12 @@ h1 {
     overflow: hidden;
 }
 
+.previous-trans-title{
+    background-color:  rgb(80, 80, 238) !important;
+    box-shadow: none !important;
+    border-radius: 10px !important;
+}
+
 .MuiDivider-root {
     height: 3px; 
     background-color: #ffffff;

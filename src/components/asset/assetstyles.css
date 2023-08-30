@@ -63,3 +63,59 @@ h1 {
     background-color: #1A60A1; 
 }
 
+/* Styling for search and filter container */
+.search-filter-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    margin-top: 1.2%;
+  }
+  /* Styling for search bar and filter dropdown */
+  .search-filter-container input {
+    background-color: rgb(80, 80, 238);
+    padding: 10px;
+    margin: 5px;
+    color: #fff;
+  }
+/* Styling to make search bar longer and center it */
+.search-filter-container input {
+  width: 50%;
+  height: 70%;
+  margin-left: auto;
+  margin-right: auto;
+  display: block;
+  margin-bottom: 1.5rem;
+  border-radius: 8px;
+  border: 2px;
+}
+
+.search-filter-container input::placeholder {
+  color: #fff;
+  text-align: center;
+  font-weight: 400;
+  font-size: 16px;
+}
+
+.items-title{
+    background-color:  rgb(80, 80, 238) !important;
+    box-shadow: none !important;
+    border-radius: 10px !important;
+}
+
+.form-assets{
+    background-color:  rgb(80, 80, 238) !important;
+    box-shadow: none !important;
+    border-radius: 10px !important;
+}
+
+/* Class for white text color and center text alignment */
+.white-text-center {
+    color: #fff !important;
+    text-align: center !important;
+  }
+  
+/* Class for centering InputLabel */
+.center-input-label {
+text-align: center !important;
+}

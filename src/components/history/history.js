@@ -40,9 +40,9 @@ function History() {
              </Grid>
             </Grid>
         <Box sx={{ flexGrow: 1 }} style={{paddingTop:'3vh', paddingBottom: '10vh', paddingLeft:32, paddingRight:16, backgroundColor: '#222'}}>
-            <Grid container spacing={2}>
-                <Grid item xs={12} md={12}>
-                    <Item ><h1>View all previous transactions.</h1></Item>
+            <Grid container spacing={0}>
+                <Grid item xs={12} md={12} className="previous-trans-title">
+                    <Item className="previous-trans-title"><h1>View all previous transactions.</h1></Item>
                 </Grid>
                 <Grid item xs={12} md={12} lg={12} xl={12} style={{marginBottom: '2rem', paddingTop:'4vh'}}>
                     <HistoryDisplay user = 'John Smith' purchasePrice='$20' timeStamp='27/08/2023' isbn = '8' title='Season of Storms' img={images.TW_SOS} author='Andrzej Sapkowski'/>
