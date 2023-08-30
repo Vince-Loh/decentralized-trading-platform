@@ -33,6 +33,11 @@ h1 {
     color: #FFF !important;
 }
 
+.asset-category{
+    color: #FFF !important;
+    padding-top: 0.5rem !important;
+}
+
 .asset-price{
     color: #6cb8ee;
     font-weight: 600 !important;

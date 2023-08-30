@@ -45,16 +45,16 @@ export default function HistoryDisplay(props) {
               <Typography variant="body2" gutterBottom>
                 ISBN: {props.isbn}
               </Typography>
-              <Typography variant="body2" gutterBottom>
+              <Typography variant="body2" gutterBottom className='purchasedDetails'>
                 Purchased by: {props.user}
               </Typography>
-              <Typography variant="body2" color="text.secondary">
+              <Typography variant="body2" className='purchasedDetails'>
                 Purchased for: {props.purchasePrice}
               </Typography>
             </Grid>
           </Grid>
           <Grid item>
-            <Typography variant="subtitle1" component="div">
+            <Typography variant="subtitle1" component="div" className='purchasedDetails'>
               {props.timeStamp}
             </Typography>
           </Grid>

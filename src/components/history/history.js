@@ -44,28 +44,28 @@ function History() {
                 <Grid item xs={12} md={12}>
                     <Item ><h1>View all previous transactions.</h1></Item>
                 </Grid>
-                <Grid item xs={12} md={12} lg={12} xl={12}>
+                <Grid item xs={12} md={12} lg={12} xl={12} style={{marginBottom: '2rem', paddingTop:'4vh'}}>
                     <HistoryDisplay user = 'John Smith' purchasePrice='$20' timeStamp='27/08/2023' isbn = '8' title='Season of Storms' img={images.TW_SOS} author='Andrzej Sapkowski'/>
                 </Grid>
-                <Grid item xs={12} md={12} lg={12} xl={12}>
+                <Grid item xs={12} md={12} lg={12} xl={12} style={{marginBottom: '2rem', paddingTop:'1vh'}}>
                     <HistoryDisplay user = 'John Smith' purchasePrice='$20' timeStamp='27/08/2023' isbn = '7' title='The Lady of the Lake' img={images.TW_TLOTL} author='Andrzej Sapkowski' price='$20'/>
                 </Grid>
-                <Grid item xs={12} md={12} lg={12} xl={12}>
+                <Grid item xs={12} md={12} lg={12} xl={12} style={{marginBottom: '2rem', paddingTop:'1vh'}}>
                     <HistoryDisplay user = 'John Smith' purchasePrice='$20' timeStamp='27/08/2023' isbn = '6' title='The Tower of the Swallow' img={images.TW_TTOTS} author='Andrzej Sapkowski' price='$20'/>                
                 </Grid>
-                <Grid item xs={12} md={12} lg={12} xl={12}>
+                <Grid item xs={12} md={12} lg={12} xl={12} style={{marginBottom: '2rem', paddingTop:'1vh'}}>
                     <HistoryDisplay user = 'John Smith' purchasePrice='$20' timeStamp='27/08/2023' isbn = '5' title='Baptism of Fire' img={images.TW_BOF} author='Andrzej Sapkowski' price='$20'/>               
                 </Grid>
-                <Grid item xs={12} md={12} lg={12} xl={12}>
+                <Grid item xs={12} md={12} lg={12} xl={12} style={{marginBottom: '2rem', paddingTop:'1vh'}}>
                     <HistoryDisplay user = 'John Smith' purchasePrice='$20' timeStamp='27/08/2023' isbn = '4' title='Time of Contempt' img={images.TW_TOC} author='Andrzej Sapkowski' price='$20'/>                
                 </Grid>
-                <Grid item xs={12} md={12} lg={12} xl={12}>
+                <Grid item xs={12} md={12} lg={12} xl={12} style={{marginBottom: '2rem', paddingTop:'1vh'}}>
                     <HistoryDisplay user = 'John Smith' purchasePrice='$20' timeStamp='27/08/2023' isbn = '3' title='Blood of Elves' img={images.TW_BOE} author='Andrzej Sapkowski' price='$20'/>                
                 </Grid>
-                <Grid item xs={12} md={12} lg={12} xl={12}>
+                <Grid item xs={12} md={12} lg={12} xl={12} style={{marginBottom: '2rem', paddingTop:'1vh'}}>
                     <HistoryDisplay user = 'John Smith' purchasePrice='$20' timeStamp='27/08/2023' isbn = '2' title='The Last Wish' img={images.TW_TLW} author='Andrzej Sapkowski' price='$20'/>                
                 </Grid>
-                <Grid item xs={12} md={12} lg={12} xl={12}>
+                <Grid item xs={12} md={12} lg={12} xl={12} style={{marginBottom: '2rem', paddingTop:'1vh'}}>
                     <HistoryDisplay user = 'John Smith' purchasePrice='$20' timeStamp='27/08/2023' isbn = '1' title='Sword of Destiny' img={images.TW_SOD} author='Andrzej Sapkowski' price='$20'/>                
                 </Grid>
             </Grid>

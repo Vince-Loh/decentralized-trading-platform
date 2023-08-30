@@ -29,3 +29,7 @@ h1 {
     border-radius: 10px;
 }
 
+.purchasedDetails{
+    color: #2B86C5 !important;
+    font-weight: 600 !important;
+}

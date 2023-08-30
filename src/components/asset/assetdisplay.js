@@ -20,6 +20,7 @@ export default function AssetDisplay(props) {
         p: 2,
         margin: 'auto',
         maxWidth: 500,
+        minWidth: 300,
         flexGrow: 1,
         backgroundColor: '#64646434',
         boxShadow: '0 4px 8px rgba(99, 98, 98, 0.336)',
@@ -43,6 +44,9 @@ export default function AssetDisplay(props) {
               </Typography>
               <Typography variant="body2" color="text.secondary" className="asset-id">
                 ISBN: {props.isbn}
+              </Typography>
+              <Typography variant="body2" color="text.secondary" className="asset-category">
+                Category: {props.category}
               </Typography>
             </Grid>
             <Grid item>

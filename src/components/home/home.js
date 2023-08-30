@@ -30,8 +30,8 @@ function Home() {
             <Grid container spacing={5} alignItems="center" justifyContent="center" style={{ backgroundColor: '#222'}}>
                 <Grid item xs={12} sm={6}>
                     <div className="pop-container">
-                        <h2 className='pop-container-title'>Explore Popular Coins</h2>
-                        <h3 className='pop-container-title'>List of digital assets available for trading!</h3>
+                        <h2 className='pop-container-title'>Explore Our Platform</h2>
+                        <h3 className='pop-container-title'>List of cryptocurrencies that is usable here!</h3>
                         
                         <Grid container spacing={4}>
                             <Grid item xs={12} sm={4}>
@@ -80,7 +80,7 @@ function Home() {
                         <div style={{ display: 'flex', justifyContent: 'center', marginTop: '2rem' }}>
                         <Link to="/assets" style={{ textDecoration: 'none' }}>
                             <Button variant="contained" color="primary" style={{marginBottom: '2.5rem'}}>
-                                Explore Coins
+                                Explore Store
                             </Button>
                         </Link>
                         </div>
