@@ -7,15 +7,17 @@ import CloseRoundedIcon from '@mui/icons-material/CloseRounded';
 import Icon from '@mui/material/Icon';
 import { Link } from 'react-router-dom';
 
-class Navbar extends Component {
-  state = { clicked: false };
-  handleClick = () => {
+// Navbar component
+class Navbar extends Component { 
+  state = { clicked: false }; // Navbar state
+  handleClick = () => { // Navbar click handler function, and set state to opposite of current state
     this.setState({ clicked:
        !this.state.clicked })
     }
 
   render() {
 
+    // Menu icon and close icon for smaller screen sizes
     const menuIcon = <MenuRoundedIcon />;
     const closeIcon = <CloseRoundedIcon />;
 

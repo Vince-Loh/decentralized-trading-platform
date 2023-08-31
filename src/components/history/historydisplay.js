@@ -7,7 +7,7 @@ import ButtonBase from '@mui/material/ButtonBase';
 import "./historystyles.css"
 
 
-const Img = styled('img')({
+const Img = styled('img')({ // Styling for the image
   margin: 'auto',
   display: 'block',
   maxWidth: '100%',

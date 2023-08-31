@@ -1,3 +1,12 @@
+/*
+
+Group 21
+
+Student Name: Vince Loh
+Student ID: 102450160
+
+*/
+
 import "./assetstyles.css"
 import * as React from 'react';
 import { styled } from '@mui/material/styles';
@@ -11,8 +20,7 @@ import Typography from '@mui/material/Typography';
 import { useState } from 'react';
 import { FormControl, InputLabel, MenuItem, Select } from '@mui/material';
 
-
-
+// Item styling for the assets page
 const Item = styled(Paper)(({ theme }) => ({
     backgroundColor: '#64646434',
     boxShadow: '0 4px 8px rgba(99, 98, 98, 0.336)',
@@ -24,10 +32,12 @@ const Item = styled(Paper)(({ theme }) => ({
 
 function Assets() {
 
+// Search and filter states
 const [searchTerm, setSearchTerm] = useState('');
 const [selectedCategory, setSelectedCategory] = useState('');
 const [selectedAuthor, setSelectedAuthor] = useState('');
 
+// Asset data
 const assets = [
   { isbn: '1', category: 'Fiction', title: 'Season of Storms', author: 'Andrzej Sapkowski', price: '$20', img: [images.TW_SOS]},
   { isbn : '2', category: 'Fiction', title: 'The Last Wish', author: 'Andrzej Sapkowski', price: '$20', img: [images.TW_TLW]},
@@ -41,11 +51,12 @@ const assets = [
 
 const filteredAssets = assets.filter(asset => {
   return (
-    asset.title.toLowerCase().includes(searchTerm.toLowerCase()) &&
-    (selectedCategory === '' || asset.category === selectedCategory)
+    asset.title.toLowerCase().includes(searchTerm.toLowerCase()) && // Search by title
+    (selectedCategory === '' || asset.category === selectedCategory) // Filter by category
   );
 });
 
+// Search and filter bar
 <div className="search-filter">
   <input type="text" placeholder="Search by Title" value={searchTerm} onChange={e => setSearchTerm(e.target.value)} />
   <select value={selectedCategory} onChange={e => setSelectedCategory(e.target.value)}>
