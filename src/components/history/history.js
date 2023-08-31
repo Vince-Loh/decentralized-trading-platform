@@ -1,3 +1,18 @@
+/*
+
+Group 21:
+
+Student Name: Vince Loh
+Student ID: 102450160
+
+Student Name: Kyle Barthelson 
+Student ID: 104035705
+
+Student Name: Nial Jones 
+Student ID: 104152769
+
+*/
+
 import "./historystyles.css"
 import * as React from 'react';
 import { styled } from '@mui/material/styles';
@@ -9,6 +24,7 @@ import Divider from '@mui/material/Divider';
 import Typography from '@mui/material/Typography';
 import HistoryDisplay from './historydisplay.js';
 
+// Item styling for the assets page
 const Item = styled(Paper)(({ theme }) => ({
     backgroundColor: '#64646434',
     boxShadow: '0 4px 8px rgba(99, 98, 98, 0.336)',
@@ -22,6 +38,7 @@ const Item = styled(Paper)(({ theme }) => ({
 function History() {
     return (<>
     <div className = 'history-container'>
+        {/* Grid for the title */}
             <Grid container spacing={0} alignItems="center" justifyContent="center">
                 <Grid item xs={12} sm={6}>
                     <div className="historyPage-title">

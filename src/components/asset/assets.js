@@ -1,9 +1,15 @@
 /*
 
-Group 21
+Group 21:
 
 Student Name: Vince Loh
 Student ID: 102450160
+
+Student Name: Kyle Barthelson 
+Student ID: 104035705
+
+Student Name: Nial Jones 
+Student ID: 104152769
 
 */
 
@@ -37,7 +43,7 @@ const [searchTerm, setSearchTerm] = useState('');
 const [selectedCategory, setSelectedCategory] = useState('');
 const [selectedAuthor, setSelectedAuthor] = useState('');
 
-// Asset data
+// Array for the assets data
 const assets = [
   { isbn: '1', category: 'Fiction', title: 'Season of Storms', author: 'Andrzej Sapkowski', price: '$20', img: [images.TW_SOS]},
   { isbn : '2', category: 'Fiction', title: 'The Last Wish', author: 'Andrzej Sapkowski', price: '$20', img: [images.TW_TLW]},
@@ -69,7 +75,8 @@ const filteredAssets = assets.filter(asset => {
 
 return (<>
     <div className = 'asset-container'>
-            <Grid container spacing={0} alignItems="center" justifyContent="center">
+        {/* Grid for the title */}
+            <Grid container spacing={0} alignItems="center" justifyContent="center"> 
                 <Grid item xs={12} sm={6}>
                     <div className="assetsPage-title">
                         <h2>
@@ -92,6 +99,7 @@ return (<>
                     <Item className="items-title"><h1>View our available items.</h1></Item>
                 </Grid>
                 </Grid>
+                {/* Search and filter bar */}
                 <div className="search-filter-container">
                     <Grid container spacing={2}>
                         <Grid item xs={12} md={12} lg ={12} >
@@ -131,6 +139,7 @@ return (<>
                             </Select>
                         </FormControl>
                         </Grid>
+                        {/* Display Assets */}
                         {filteredAssets.map((asset, index) => (
                             <Grid item xs={12} sm={12} lg={3} xl={3} style={{marginBottom: '2rem', paddingTop:'6vh'}}>
                             <AssetDisplay key={index} {...asset} />

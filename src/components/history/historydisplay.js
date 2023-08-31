@@ -1,3 +1,18 @@
+/*
+
+Group 21:
+
+Student Name: Vince Loh
+Student ID: 102450160
+
+Student Name: Kyle Barthelson 
+Student ID: 104035705
+
+Student Name: Nial Jones 
+Student ID: 104152769
+
+*/
+
 import * as React from 'react';
 import { styled } from '@mui/material/styles';
 import Grid from '@mui/material/Grid';
@@ -6,8 +21,8 @@ import Typography from '@mui/material/Typography';
 import ButtonBase from '@mui/material/ButtonBase';
 import "./historystyles.css"
 
-
-const Img = styled('img')({ // Styling for the image
+// Styling for the image
+const Img = styled('img')({ 
   margin: 'auto',
   display: 'block',
   maxWidth: '100%',
