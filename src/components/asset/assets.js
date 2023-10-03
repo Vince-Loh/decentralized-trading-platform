@@ -23,8 +23,9 @@ import AssetDisplay from './assetdisplay.js'
 import * as images from '../images/images';
 import Divider from '@mui/material/Divider';
 import Typography from '@mui/material/Typography';
-import { useState } from 'react';
 import { FormControl, InputLabel, MenuItem, Select } from '@mui/material';
+import { fetchAssets } from './fetchassets';
+import { useEffect, useState } from 'react';
 
 // Item styling for the assets page
 const Item = styled(Paper)(({ theme }) => ({
@@ -36,6 +37,16 @@ const Item = styled(Paper)(({ theme }) => ({
     textAlign: 'center',
   }));
 
+async function loadAssets() {
+    try {
+        const assetsData = await fetchAssets();
+        console.log('Received assets data: ', assetsData);
+
+    } catch (error) {
+        console.error('Error loading assets: ', error);
+    }
+}
+
 function Assets() {
 
 // Search and filter states
@@ -43,7 +54,8 @@ const [searchTerm, setSearchTerm] = useState('');
 const [selectedCategory, setSelectedCategory] = useState('');
 const [selectedAuthor, setSelectedAuthor] = useState('');
 
-// Array for the assets data
+// Array for the assets data 
+/*
 const assets = [
   { isbn: '1', category: 'Fiction', title: 'Season of Storms', author: 'Andrzej Sapkowski', price: '$20', img: [images.TW_SOS]},
   { isbn : '2', category: 'Fiction', title: 'The Last Wish', author: 'Andrzej Sapkowski', price: '$20', img: [images.TW_TLW]},
@@ -54,6 +66,21 @@ const assets = [
     { isbn : '7', category: 'Fiction', title: 'The Lady of the Lake', author: 'Andrzej Sapkowski', price: '$20', img: [images.TW_TLOTL]},
     { isbn : '8', category: 'Fiction', title: 'Season of Storms', author: 'Andrzej Sapkowski', price: '$20', img:  [images.TW_SOD]},
 ];
+*/
+
+    const [assets, setAssets] = useState([]);
+
+    useEffect(() => {
+    // Fetch assets when the component mounts
+        fetchAssets()
+        .then((data) => {
+            setAssets(data); // Update the assets state when data is fetched
+        })
+        .catch((error) => {
+            console.error('Error fetching assets:', error);
+        });
+    }, []);
+
 
 const filteredAssets = assets.filter(asset => {
   return (
@@ -61,6 +88,7 @@ const filteredAssets = assets.filter(asset => {
     (selectedCategory === '' || asset.category === selectedCategory) // Filter by category
   );
 });
+
 
 // Search and filter bar
 <div className="search-filter">
@@ -72,6 +100,8 @@ const filteredAssets = assets.filter(asset => {
     <option value="Non-Fiction">Technology</option>
   </select>
 </div>
+
+
 
 return (<>
     <div className = 'asset-container'>
@@ -140,6 +170,7 @@ return (<>
                         </FormControl>
                         </Grid>
                         {/* Display Assets */}
+                        
                         {filteredAssets.map((asset, index) => (
                             <Grid item xs={12} sm={12} lg={3} xl={3} style={{marginBottom: '2rem', paddingTop:'6vh'}}>
                             <AssetDisplay key={index} {...asset} />
