@@ -20,7 +20,6 @@ import Box from '@mui/material/Box';
 import Paper from '@mui/material/Paper';
 import Grid from '@mui/material/Grid';
 import AssetDisplay from './assetdisplay.js'
-import * as images from '../images/images';
 import Divider from '@mui/material/Divider';
 import Typography from '@mui/material/Typography';
 import { FormControl, InputLabel, MenuItem, Select } from '@mui/material';

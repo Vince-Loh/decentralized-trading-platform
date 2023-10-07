@@ -1,11 +1,22 @@
 from fastapi import FastAPI, HTTPException
 from pydantic import BaseModel
 from fastapi.middleware.cors import CORSMiddleware
+from web3 import Web3
 
 import mysql.connector
-
-
 app = FastAPI()
+
+# Connect to Ganache
+w3 = Web3(Web3.HTTPProvider("http://127.0.0.1:7545"))
+connected = False
+try:
+    if w3.eth.accounts:
+        connected = True
+except:
+    pass
+
+assert connected, "Failed to connect to the blockchain"
+
 
 origins = ["*"]
 
