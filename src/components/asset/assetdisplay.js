@@ -7,6 +7,17 @@ import ButtonBase from '@mui/material/ButtonBase';
 import Button from '@mui/material/Button'; // Import Button from MUI
 import axios from 'axios'; // Import Axios for making the purchase request
 import "./assetstyles.css";
+import Web3 from 'web3';
+import BookStore from '../../BookStore.json';
+
+
+
+const web3 = new Web3(Web3.givenProvider || "http://127.0.0.1:7545");
+
+const contractAddress = "0x6D6bd3f942f1bAFde1840D7f17bdAa3A87573649"; // Replace with your contract's deployed address
+
+const contract = new web3.eth.Contract(BookStore.abi, contractAddress);
+
 
 // Styling for the image
 const Img = styled('img')({
@@ -16,21 +27,77 @@ const Img = styled('img')({
   maxHeight: '100%',
 });
 
+
 export default function AssetDisplay(props) {
+
   // Function to handle the purchase
   const handlePurchase = () => {
-    // Make a request to the backend to initiate the purchase
-    axios
-      .post('http://127.0.0.1:8000/purchase', { isbn: props.isbn, price: props.price }) // Adjust the endpoint and payload as needed
-      .then((response) => {
-        // Handle the response, e.g., update UI or show a success message
-        console.log('Purchase successful:', response.data);
-      })
-      .catch((error) => {
-        // Handle errors, e.g., show an error message
-        console.error('Purchase failed:', error);
-      });
-  };
+    const promptedUserName = prompt("Please enter your name:");
+        if (!promptedUserName) {
+            alert("Name is required to proceed with the purchase.");
+            return;
+        }
+
+        const promptedUserEmail = prompt("Please enter your email:");
+        if (!promptedUserEmail) {
+            alert("Email is required to proceed with the purchase.");
+            return;
+        }
+        
+        // Convert the price from ETH to Wei
+      const priceInWei = web3.utils.toWei(props.price.toString(), 'ether');
+
+        // Call your purchaseItem function here with the item details and user details
+       purchaseBook(props.isbn, props.title, priceInWei, promptedUserEmail, promptedUserName);
+    
+      // Make a request to the backend to initiate the purchase
+      axios
+        .post('http://127.0.0.1:8000/purchase', { isbn: props.isbn, price: props.price }) // Adjust the endpoint and payload as needed
+        .then((response) => {
+          // Handle the response, e.g., update UI or show a success message
+          console.log('Purchase successful:', response.data);
+        })
+        .catch((error) => {
+          // Handle errors, e.g., show an error message
+          console.error('Purchase failed:', error);
+        });
+    };
+
+  // Function to purchase a book
+  async function purchaseBook(isbn, bookName, price, userEmail, userName) {
+    const accounts = await web3.eth.getAccounts();
+    try {
+      await contract.methods.purchaseBook(isbn, bookName, price, userEmail, userName)
+        .send({ from: accounts[0],gas: 5000000 });
+      alert("Purchase successful!");
+    } catch (error) {
+      throw new Error("Purchase failed: " + error.message);
+    }
+  }
+
+    /* Function to fetch the purchase time of a book - can be used for history page 
+  async function fetchPurchaseTime(isbn) {
+    try {
+        const timestamp = await contract.methods.getPurchaseTime(isbn).call();
+        const purchaseTime = new Date(timestamp * 1000).toISOString();
+        return purchaseTime;
+    } catch (error) {
+        console.error("Failed to fetch purchase time:", error);
+        return null;
+    }
+  }
+
+  const [purchaseTime, setPurchaseTime] = React.useState(null);
+
+  React.useEffect(() => {
+    async function retrievePurchasedTime() {
+        const time = await fetchPurchaseTime(props.isbn);
+        setPurchaseTime(time);
+    }
+
+    retrievePurchasedTime();
+}, [props.isbn]);
+  */
 
   return (
     <Paper
@@ -70,13 +137,13 @@ export default function AssetDisplay(props) {
             <Grid item>
               {/* Display a Purchase button */}
               <Button variant="contained" onClick={handlePurchase} className="asset-purchase-btn">
-                Purchase for {props.price}
+                Purchase Now
               </Button>
             </Grid>
           </Grid>
           <Grid item>
             <Typography className="asset-price" variant="subtitle1" component="div">
-              {props.price}
+              {props.price + ' ETH'}
             </Typography>
           </Grid>
         </Grid>
