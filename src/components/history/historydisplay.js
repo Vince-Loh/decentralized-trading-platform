@@ -61,16 +61,16 @@ export default function HistoryDisplay(props) {
                 ISBN: {props.isbn}
               </Typography>
               <Typography variant="body2" gutterBottom className='purchasedDetails'>
-                Purchased by: {props.user}
+                Purchased by: {props.purchased_by}
               </Typography>
               <Typography variant="body2" className='purchasedDetails'>
-                Purchased for: {props.purchasePrice}
+                Purchased for: {props.price} ETH
               </Typography>
             </Grid>
           </Grid>
           <Grid item>
             <Typography variant="subtitle1" component="div" className='purchasedDetails'>
-              {props.timeStamp}
+              {props.purchase_date}
             </Typography>
           </Grid>
         </Grid>

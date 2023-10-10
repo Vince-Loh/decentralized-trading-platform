@@ -1,53 +1,54 @@
 // SPDX-License-Identifier: MIT
-pragma solidity ^0.8.0;
+pragma solidity ^0.6.0;
 
-contract BookStore {
+pragma experimental ABIEncoderV2; // Enable ABIEncoderV2
 
+contract PurchaseBook {
     struct Purchase {
         string ISBN;
-        string bookName;
         uint256 price;
-        uint256 purchasedTime;
-        string userEmail;
-        string userName;
+        string purchasedBy;
+        string purchaseEmail;
+        string purchaseDate;
     }
 
     mapping(uint256 => Purchase) public purchases;
-    mapping(string => uint256) public purchaseTime;
-
-    event BookPurchased(string ISBN, string bookName, string userName, string userEmail, uint256 timestamp);
-
-
-    //purchase IDs
     uint256 public purchaseCount;
 
-    function purchaseBook(
+    event ItemPurchased(
+        string indexed ISBN,
+        uint256 price,
+        string purchasedBy,
+        string purchaseEmail,
+        string purchaseDate
+    );
+
+    constructor() public {
+        purchaseCount = 0;
+    }
+
+    function purchaseItem(
         string memory _ISBN,
-        string memory _bookName,
-        uint256 _price, 
-        string memory _userEmail, 
-        string memory _userName
+        uint256 _price,
+        string memory _purchasedBy,
+        string memory _purchaseEmail,
+        string memory _purchaseDate
     ) public {
+        require(bytes(_ISBN).length > 0, "ISBN cannot be empty");
+        require(_price > 0, "Price must be greater than zero");
+        require(bytes(_purchasedBy).length > 0, "PurchasedBy cannot be empty");
+        require(bytes(_purchaseEmail).length > 0, "PurchaseEmail cannot be empty");
+        require(bytes(_purchaseDate).length > 0, "PurchaseDate cannot be empty");
+
         purchaseCount++;
         purchases[purchaseCount] = Purchase({
-            bookName: _bookName,
             ISBN: _ISBN,
             price: _price,
-            purchasedTime: block.timestamp,
-            userEmail: _userEmail,
-            userName: _userName
+            purchasedBy: _purchasedBy,
+            purchaseEmail: _purchaseEmail,
+            purchaseDate: _purchaseDate
         });
 
-        // Emit the Book Purchased event
-        emit BookPurchased(_ISBN, _bookName, _userName, _userEmail, block.timestamp);
+        emit ItemPurchased(_ISBN, _price, _purchasedBy, _purchaseEmail, _purchaseDate);
     }
-
-    function getPurchaseDetails(uint256 _purchaseId) public view returns (Purchase memory) {
-        return purchases[_purchaseId];
-    }
-
-    function getPurchaseTime(string memory _ISBN) public view returns (uint256) {
-    return purchaseTime[_ISBN];
-}
-
 }

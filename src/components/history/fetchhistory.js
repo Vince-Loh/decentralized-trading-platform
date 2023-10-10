@@ -1,8 +1,8 @@
 import axios from 'axios';
 
-export async function fetchAssets() {
+export async function fetchHistory() {
   try {
-    const response = await axios.get('http://127.0.0.1:8000/getBooksForSale');
+    const response = await axios.get('http://127.0.0.1:8000/getPurchases');
     if (response.data) {
       return convertToDesiredFormat(response.data);
     }
@@ -29,6 +29,9 @@ export async function convertToDesiredFormat(books) {
         title: bookInfo.Book_Title,
         author: bookInfo.Book_Author,
         img: [bookInfo.Cover_URL],
+        purchased_by: book.Purchased_By,
+        purchase_date: book.Purchase_Date
+
       };
 
       formattedBooks.push(formattedBook);

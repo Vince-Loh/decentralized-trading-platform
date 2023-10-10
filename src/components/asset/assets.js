@@ -36,16 +36,6 @@ const Item = styled(Paper)(({ theme }) => ({
     textAlign: 'center',
   }));
 
-async function loadAssets() {
-    try {
-        const assetsData = await fetchAssets();
-        console.log('Received assets data: ', assetsData);
-
-    } catch (error) {
-        console.error('Error loading assets: ', error);
-    }
-}
-
 function Assets() {
 
 // Search and filter states

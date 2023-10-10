@@ -9,12 +9,13 @@ import axios from 'axios'; // Import Axios for making the purchase request
 import "./assetstyles.css";
 import Web3 from 'web3';
 import BookStore from '../../BookStore.json';
+import { useEffect, useState } from 'react';
 
 
 
 const web3 = new Web3(Web3.givenProvider || "http://127.0.0.1:7545");
 
-const contractAddress = "0x6D6bd3f942f1bAFde1840D7f17bdAa3A87573649"; // Replace with your contract's deployed address
+const contractAddress = "0xA2B690363847F3B0d9D85e41af6E59c76c30e1fC"; // Replace with your contract's deployed address
 
 const contract = new web3.eth.Contract(BookStore.abi, contractAddress);
 
@@ -43,28 +44,32 @@ export default function AssetDisplay(props) {
             alert("Email is required to proceed with the purchase.");
             return;
         }
-        
-        // Convert the price from ETH to Wei
-      const priceInWei = web3.utils.toWei(props.price.toString(), 'ether');
 
-        // Call your purchaseItem function here with the item details and user details
-       purchaseBook(props.isbn, props.title, priceInWei, promptedUserEmail, promptedUserName);
-    
-      // Make a request to the backend to initiate the purchase
-      axios
-        .post('http://127.0.0.1:8000/purchase', { isbn: props.isbn, price: props.price }) // Adjust the endpoint and payload as needed
-        .then((response) => {
-          // Handle the response, e.g., update UI or show a success message
-          console.log('Purchase successful:', response.data);
-        })
-        .catch((error) => {
-          // Handle errors, e.g., show an error message
-          console.error('Purchase failed:', error);
-        });
+        purchaseBook(props.isbn, props.title, props.price, promptedUserEmail, promptedUserName)
     };
 
   // Function to purchase a book
   async function purchaseBook(isbn, bookName, price, userEmail, userName) {
+
+    const purchaseData = {
+      isbn: isbn,
+      price: price,
+      purchased_by: userName,
+      purchase_email: userEmail
+    }
+    // Make a request to the backend to initiate the purchase
+    axios
+      .post('http://127.0.0.1:8000/purchase', purchaseData) // Adjust the endpoint and payload as needed
+      .then((response) => {
+        // Handle the response, e.g., update UI or show a success message
+        console.log('Purchase successful:', response.data);
+      })
+      .catch((error) => {
+        // Handle errors, e.g., show an error message
+        console.error('Purchase failed:', error);
+      });
+
+/*
     const accounts = await web3.eth.getAccounts();
     try {
       await contract.methods.purchaseBook(isbn, bookName, price, userEmail, userName)
@@ -72,7 +77,7 @@ export default function AssetDisplay(props) {
       alert("Purchase successful!");
     } catch (error) {
       throw new Error("Purchase failed: " + error.message);
-    }
+    }*/
   }
 
     /* Function to fetch the purchase time of a book - can be used for history page 
