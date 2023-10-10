@@ -30,6 +30,7 @@ export async function convertToDesiredFormat(books) {
         author: bookInfo.Book_Author,
         img: [bookInfo.Cover_URL],
         purchased_by: book.Purchased_By,
+        purchase_email: book.Purchase_Email,
         purchase_date: book.Purchase_Date
 
       };

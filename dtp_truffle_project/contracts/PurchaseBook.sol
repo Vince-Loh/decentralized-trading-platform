@@ -16,7 +16,7 @@ contract PurchaseBook {
     uint256 public purchaseCount;
 
     event ItemPurchased(
-        string indexed ISBN,
+        string ISBN,
         uint256 price,
         string purchasedBy,
         string purchaseEmail,
@@ -27,13 +27,17 @@ contract PurchaseBook {
         purchaseCount = 0;
     }
 
+    receive() external payable {
+        // Allows receiving Ethereum
+    }
+
     function purchaseItem(
         string memory _ISBN,
         uint256 _price,
         string memory _purchasedBy,
         string memory _purchaseEmail,
         string memory _purchaseDate
-    ) public {
+    ) public payable {
         require(bytes(_ISBN).length > 0, "ISBN cannot be empty");
         require(_price > 0, "Price must be greater than zero");
         require(bytes(_purchasedBy).length > 0, "PurchasedBy cannot be empty");
@@ -50,5 +54,14 @@ contract PurchaseBook {
         });
 
         emit ItemPurchased(_ISBN, _price, _purchasedBy, _purchaseEmail, _purchaseDate);
+    }
+
+    function getTotalPurchaseCount() public view returns (uint256) {
+        return purchaseCount;
+    }
+
+    function getPurchase(uint256 _index) public view returns (Purchase memory) {
+        require(_index > 0 && _index <= purchaseCount, "Invalid index");
+        return purchases[_index];
     }
 }

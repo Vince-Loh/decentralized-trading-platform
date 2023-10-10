@@ -6,19 +6,9 @@ import Typography from '@mui/material/Typography';
 import ButtonBase from '@mui/material/ButtonBase';
 import Button from '@mui/material/Button'; // Import Button from MUI
 import axios from 'axios'; // Import Axios for making the purchase request
-import "./assetstyles.css";
-import Web3 from 'web3';
+import "./assetstyles.css"
 import BookStore from '../../BookStore.json';
 import { useEffect, useState } from 'react';
-
-
-
-const web3 = new Web3(Web3.givenProvider || "http://127.0.0.1:7545");
-
-const contractAddress = "0xA2B690363847F3B0d9D85e41af6E59c76c30e1fC"; // Replace with your contract's deployed address
-
-const contract = new web3.eth.Contract(BookStore.abi, contractAddress);
-
 
 // Styling for the image
 const Img = styled('img')({
@@ -34,28 +24,35 @@ export default function AssetDisplay(props) {
   // Function to handle the purchase
   const handlePurchase = () => {
     const promptedUserName = prompt("Please enter your name:");
-        if (!promptedUserName) {
-            alert("Name is required to proceed with the purchase.");
-            return;
-        }
+    if (!promptedUserName) {
+      alert("Name is required to proceed with the purchase.");
+      return;
+    }
 
-        const promptedUserEmail = prompt("Please enter your email:");
-        if (!promptedUserEmail) {
-            alert("Email is required to proceed with the purchase.");
-            return;
-        }
+    const promptedUserEmail = prompt("Please enter your email:");
+    if (!promptedUserEmail) {
+      alert("Email is required to proceed with the purchase.");
+      return;
+    }
 
-        purchaseBook(props.isbn, props.title, props.price, promptedUserEmail, promptedUserName)
+    const promptedWallet = prompt("Please provide your wallet address (0x.....):");
+    if (!promptedWallet) {
+      alert("Wallet is required to proceed with the purchase.");
+      return;
+    }
+
+    purchaseBook(props.isbn, props.title, props.price, promptedUserEmail, promptedUserName, promptedWallet)
     };
 
   // Function to purchase a book
-  async function purchaseBook(isbn, bookName, price, userEmail, userName) {
+  async function purchaseBook(isbn, bookName, price, userEmail, userName, wallet) {
 
     const purchaseData = {
       isbn: isbn,
       price: price,
       purchased_by: userName,
-      purchase_email: userEmail
+      purchase_email: userEmail,
+      customer_wallet: wallet
     }
     // Make a request to the backend to initiate the purchase
     axios
@@ -63,6 +60,7 @@ export default function AssetDisplay(props) {
       .then((response) => {
         // Handle the response, e.g., update UI or show a success message
         console.log('Purchase successful:', response.data);
+        alert(response.data);
       })
       .catch((error) => {
         // Handle errors, e.g., show an error message
