@@ -1,19 +1,4 @@
-/*
-
-Group 21:
-
-Student Name: Vince Loh
-Student ID: 102450160
-
-Student Name: Kyle Barthelson 
-Student ID: 104035705
-
-Student Name: Nial Jones 
-Student ID: 104152769
-
-*/
-
-import React, { Component } from "react";
+import React, { useState } from "react";
 import CameraRoundedIcon from '@mui/icons-material/CameraRounded';
 import './navbarstyles.css';
 import { MenuData } from './menudata.js';
@@ -22,48 +7,57 @@ import CloseRoundedIcon from '@mui/icons-material/CloseRounded';
 import Icon from '@mui/material/Icon';
 import { Link } from 'react-router-dom';
 
-// Navbar component
-class Navbar extends Component { 
-  state = { clicked: false }; // Navbar state
-  handleClick = () => { // Navbar click handler function, and set state to opposite of current state
-    this.setState({ clicked:
-       !this.state.clicked })
-    }
+function Navbar() {
+  const [clicked, setClicked] = useState(false);
 
-  render() {
-
-    // Menu icon and close icon for smaller screen sizes
-    const menuIcon = <MenuRoundedIcon />;
-    const closeIcon = <CloseRoundedIcon />;
-
-    return (
-      <nav className="Navbaritems">
-        <h1 className="logo">
-          GRP21 <Link to="/home" style={{ textDecoration: 'none' }}>   <CameraRoundedIcon className="camera-rounded" style={{ verticalAlign: 'middle', color: '#2B86C5'}} /> </Link>
-        </h1>
-
-         <div className="menu-icons" onClick={this.handleClick}>
-              <Icon className={this.state.clicked ? 'close-icon' : 'menu-icon'}>
-                {this.state.clicked ? closeIcon : menuIcon}
-              </Icon>
-         </div>  
-
-        <ul className={this.state.clicked ? "nav-menu active" : "nav-menu"}>
-            {MenuData.map((item, index) => 
-              {
-                return (
-                <li key={index}>
-                    <a href={item.url} className={item.cName}>
-                        {item.icon}
-                        <span>{item.title}</span>
-                    </a>
-                </li>
-            );
-            })}
-        </ul>
-      </nav>
-    );
+  const handleClick = () => {
+    setClicked(!clicked);
   }
+
+  const menuIcon = <MenuRoundedIcon />;
+  const closeIcon = <CloseRoundedIcon />;
+
+  const handleLogout = () => {
+    sessionStorage.removeItem('isLoggedIn');
+    sessionStorage.removeItem('userEmail');
+    window.location.href = '/home';
+  }
+
+  const isLoggedIn = sessionStorage.getItem('isLoggedIn') === 'true';
+
+  return (
+    <nav className="Navbaritems">
+      <h1 className="logo">
+        GRP21 <Link to="/home" style={{ textDecoration: 'none' }}>   <CameraRoundedIcon className="camera-rounded" style={{ verticalAlign: 'middle', color: '#2B86C5'}} /> </Link>
+      </h1>
+
+      <div className="menu-icons" onClick={handleClick}>
+        <Icon className={clicked ? 'close-icon' : 'menu-icon'}>
+          {clicked ? closeIcon : menuIcon}
+        </Icon>
+      </div>
+
+      <ul className={clicked ? "nav-menu active" : "nav-menu"}>
+        {MenuData.map((item, index) => {
+          return (
+            <li key={index}>
+              <a href={item.url} className={item.cName}>
+                {item.icon}
+                <span>{item.title}</span>
+              </a>
+            </li>
+          );
+        })}
+        {isLoggedIn && (
+          <li>
+            <button className="logout-button" onClick={handleLogout}>
+              Logout
+            </button>
+          </li>
+        )}
+      </ul>
+    </nav>
+  );
 }
 
 export default Navbar;

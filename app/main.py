@@ -1,4 +1,4 @@
-from fastapi import FastAPI, HTTPException
+from fastapi import FastAPI, HTTPException, Query
 from pydantic import BaseModel
 from fastapi.middleware.cors import CORSMiddleware
 from web3 import Web3
@@ -22,7 +22,7 @@ assert connected, "Failed to connect to the blockchain"
 
 # Blockchain Config ---
 chain_id = 1337 
-contract_address = '0x05Dff9C22035c92c3E986dE39Fbe67d7Fc52450f'
+contract_address = '0xcfE5C1EBFf5e5ec71c56110e2D62A080bC79648D'
 
 with open("../dtp_truffle_project/contracts/PurchaseBook.sol", "r") as file:
     bookstore_file = file.read()
@@ -68,13 +68,20 @@ app.add_middleware(
 )
 
 
+class Account(BaseModel):
+    email: str
+    password: str
+
+class EmailData(BaseModel):
+    email : str
+
 class PurchaseRequest(BaseModel):
     isbn: str
     price: int
-    purchased_by: str
     purchase_email: str
     purchase_date: str = datetime.now().strftime('%Y-%m-%d')
     customer_wallet: str
+    customer_wallet_secret: str
 
 # for section 3
 
@@ -135,35 +142,98 @@ async def get_book_info(book_isbn : str):
 
 
 
-@app.get("/getPurchases/")
-async def get_purchases():
+@app.get("/getPurchases")
+async def get_purchases(email : str):
+    print("get_purchases", email)
     try:
-        result = await get_blockchain_purchases()
+        result = await get_blockchain_purchases(email)
         print(result)
         purchases = []
         for row in result:
             purchase = {
                 "ISBN": row["ISBN"],
                 "Price": row["price"],
-                "Purchased_By": row["purchasedBy"],
-                "Purchase_Email": row["purchaseEmail"],
                 "Purchase_Date": row["purchaseDate"]
             }
             purchases.append(purchase)
         return purchases
 
     except Exception as err:
-        # Handle errors, e.g., return an appropriate error response
         print(f"Error: {err}")
         return HTTPException(status_code=500, detail=f"Error: {err}")
+
+
+@app.post("/login")
+async def login_account(account_data: Account):
+    print("Logging in user: ", str(account_data))
+    try:
+        connection = mysql.connector.connect(**db_config)
+        cursor = connection.cursor()
+        query = "SELECT * FROM accounts WHERE email = %s AND password = %s"
+        values = (account_data.email, account_data.password)
+        cursor.execute(query, values)
+        result = cursor.fetchall()
+
+        if result:
+            cursor.close()
+            connection.close()
+            return "success"
+        
+        return "failure"
+
+
+    except Exception as err:
+        print(f"Error: {err}")
+        return HTTPException(status_code=500, detail=f"Error: {err}")
+    
+
+
+@app.post("/register")
+async def register_account(account_data: Account):
+    print("Registering user: ", str(account_data))
+    try:
+        connection = mysql.connector.connect(**db_config)
+        cursor = connection.cursor()
+        # check account hasn't been previously registered
+        query = "SELECT * FROM accounts WHERE email = %s"
+        value = (account_data.email, )
+        cursor.execute(query, value)
+        result = cursor.fetchall()
+
+        if result:
+            cursor.close()
+            connection.close()
+            return "Account already registered."
+        
+        # register account
+
+        query = "INSERT INTO accounts (email, password) VALUES (%s, %s)"
+        values = (account_data.email, account_data.password)
+        cursor.execute(query, values)
+        connection.commit()
+        cursor.close()
+        connection.close()
+
+        return "Account registered."
+
+    
+    except Exception as err:
+        print(f"Error: {err}")
+        return HTTPException(status_code=500, detail=f"Error: {err}")
+
+
+
+
+
 
 
 @app.post("/purchase")
 async def purchase_item(purchase_data: PurchaseRequest):
     try:
 
-        customer_wallet = '0xA2B690363847F3B0d9D85e41af6E59c76c30e1fC'  # Replace with your address
-        private_key = '0x82052e7430821598b4919f85fa76d3a8a92520b4dab54b80bce0a85c1eb02b1a'  # Replace with your private key
+        customer_wallet = purchase_data.customer_wallet
+        private_key = purchase_data.customer_wallet_secret
+
         # Calculate nonce
         nonce = w3.eth.get_transaction_count(customer_wallet)
         price_wei = int(purchase_data.price * 10**18)
@@ -173,7 +243,6 @@ async def purchase_item(purchase_data: PurchaseRequest):
         purchase_txn = BookContract.functions.purchaseItem(
             purchase_data.isbn,
             purchase_data.price,
-            purchase_data.purchased_by,
             purchase_data.purchase_email,
             purchase_data.purchase_date,
         ).build_transaction(
@@ -190,16 +259,7 @@ async def purchase_item(purchase_data: PurchaseRequest):
         purchase_tx_hash = w3.eth.send_raw_transaction(signed_purchase_txn.rawTransaction)
         purchase_tx_receipt = w3.eth.wait_for_transaction_receipt(purchase_tx_hash)
 
-        """
-        # Insert into purchase_data table
-        connection = mysql.connector.connect(**db_config)
-        cursor = connection.cursor()
-        query = "INSERT INTO purchase_data (ISBN, Price, Purchased_By, Purchase_Date) VALUES (%s, %s, %s, %s)"
-        values = (purchase_data.isbn, purchase_data.price, purchase_data.purchased_by, purchase_data.purchase_date)
-        cursor.execute(query, values)
-        connection.commit()
-        """
-        """
+        
         # Delete from assets table
         connection = mysql.connector.connect(**db_config)
         cursor = connection.cursor()
@@ -209,33 +269,36 @@ async def purchase_item(purchase_data: PurchaseRequest):
         connection.commit()
         cursor.close()
         connection.close()
-        """
         
 
-        return {"message": f"Purchase successful: {purchase_tx_receipt}"}
+        return {"message": f"Purchase successful!"}
 
     except Exception as err:
-        # Handle errors, e.g., return an appropriate error response
         print(f"Error: {err}")
         return HTTPException(status_code=500, detail=f"Error: {err}")
 
 
-async def get_blockchain_purchases():
+async def get_blockchain_purchases(email: str):
+    print("get_blockchain_purchase", email)
     try:
         purchase_count = BookContract.functions.getTotalPurchaseCount().call()
 
         purchases = []
         for i in range(1, purchase_count + 1):
             purchase_data = BookContract.functions.getPurchase(i).call()
-            purchases.append({
-                "ISBN": purchase_data[0],
-                "price": purchase_data[1],
-                "purchasedBy": purchase_data[2],
-                "purchaseEmail": purchase_data[3],
-                "purchaseDate": purchase_data[4]
-            })
+            print(str(purchase_data[2]), email)
+            if str(purchase_data[2]) != email:
+                pass
+            else:
+                # matches user..
+                purchases.append({
+                    "ISBN": purchase_data[0],
+                    "price": purchase_data[1],
+                    "purchaseDate": purchase_data[3]
+                })
+            
+            print(str(purchases))
         return purchases
     except Exception as err:
-        # Handle errors, e.g., return an appropriate error response
         print(f"Error: {err}")
         return HTTPException(status_code=500, detail=f"Error: {err}")

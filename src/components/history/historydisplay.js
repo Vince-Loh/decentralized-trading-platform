@@ -60,14 +60,8 @@ export default function HistoryDisplay(props) {
               <Typography variant="body2" gutterBottom>
                 ISBN: {props.isbn}
               </Typography>
-              <Typography variant="body2" gutterBottom className='purchasedDetails'>
-                Purchased by: {props.purchased_by}
-              </Typography>
-              <Typography variant="body2" gutterBottom className='purchasedDetails'>
-                Email: {props.purchase_email}
-              </Typography>
               <Typography variant="body2" className='purchasedDetails'>
-                Purchased for: {props.price} ETH
+                You purchased for: {props.price} ETH
               </Typography>
             </Grid>
           </Grid>

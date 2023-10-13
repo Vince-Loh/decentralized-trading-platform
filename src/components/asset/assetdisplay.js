@@ -23,17 +23,6 @@ export default function AssetDisplay(props) {
 
   // Function to handle the purchase
   const handlePurchase = () => {
-    const promptedUserName = prompt("Please enter your name:");
-    if (!promptedUserName) {
-      alert("Name is required to proceed with the purchase.");
-      return;
-    }
-
-    const promptedUserEmail = prompt("Please enter your email:");
-    if (!promptedUserEmail) {
-      alert("Email is required to proceed with the purchase.");
-      return;
-    }
 
     const promptedWallet = prompt("Please provide your wallet address (0x.....):");
     if (!promptedWallet) {
@@ -41,18 +30,24 @@ export default function AssetDisplay(props) {
       return;
     }
 
-    purchaseBook(props.isbn, props.title, props.price, promptedUserEmail, promptedUserName, promptedWallet)
+    const promptedWalletSecret = prompt("Please provide your wallet secret (longer 0x.....):");
+    if (!promptedWallet) {
+      alert("Wallet secret is required to proceed with the purchase.");
+      return;
+    }
+
+    purchaseBook(props.isbn, props.price, props.userEmail, promptedWallet, promptedWalletSecret)
     };
 
   // Function to purchase a book
-  async function purchaseBook(isbn, bookName, price, userEmail, userName, wallet) {
+  async function purchaseBook(isbn, price, userEmail, wallet, walletSecret) {
 
     const purchaseData = {
       isbn: isbn,
       price: price,
-      purchased_by: userName,
       purchase_email: userEmail,
-      customer_wallet: wallet
+      customer_wallet: wallet,
+      customer_wallet_secret: walletSecret
     }
     // Make a request to the backend to initiate the purchase
     axios
@@ -60,47 +55,15 @@ export default function AssetDisplay(props) {
       .then((response) => {
         // Handle the response, e.g., update UI or show a success message
         console.log('Purchase successful:', response.data);
-        alert(response.data);
+        alert(response.data.message);
+        window.location.href = '/assets'
+        props.onPurchaseSuccess();
       })
       .catch((error) => {
         // Handle errors, e.g., show an error message
         console.error('Purchase failed:', error);
       });
-
-/*
-    const accounts = await web3.eth.getAccounts();
-    try {
-      await contract.methods.purchaseBook(isbn, bookName, price, userEmail, userName)
-        .send({ from: accounts[0],gas: 5000000 });
-      alert("Purchase successful!");
-    } catch (error) {
-      throw new Error("Purchase failed: " + error.message);
-    }*/
   }
-
-    /* Function to fetch the purchase time of a book - can be used for history page 
-  async function fetchPurchaseTime(isbn) {
-    try {
-        const timestamp = await contract.methods.getPurchaseTime(isbn).call();
-        const purchaseTime = new Date(timestamp * 1000).toISOString();
-        return purchaseTime;
-    } catch (error) {
-        console.error("Failed to fetch purchase time:", error);
-        return null;
-    }
-  }
-
-  const [purchaseTime, setPurchaseTime] = React.useState(null);
-
-  React.useEffect(() => {
-    async function retrievePurchasedTime() {
-        const time = await fetchPurchaseTime(props.isbn);
-        setPurchaseTime(time);
-    }
-
-    retrievePurchasedTime();
-}, [props.isbn]);
-  */
 
   return (
     <Paper

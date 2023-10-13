@@ -7,7 +7,6 @@ contract PurchaseBook {
     struct Purchase {
         string ISBN;
         uint256 price;
-        string purchasedBy;
         string purchaseEmail;
         string purchaseDate;
     }
@@ -18,7 +17,6 @@ contract PurchaseBook {
     event ItemPurchased(
         string ISBN,
         uint256 price,
-        string purchasedBy,
         string purchaseEmail,
         string purchaseDate
     );
@@ -34,13 +32,11 @@ contract PurchaseBook {
     function purchaseItem(
         string memory _ISBN,
         uint256 _price,
-        string memory _purchasedBy,
         string memory _purchaseEmail,
         string memory _purchaseDate
     ) public payable {
         require(bytes(_ISBN).length > 0, "ISBN cannot be empty");
         require(_price > 0, "Price must be greater than zero");
-        require(bytes(_purchasedBy).length > 0, "PurchasedBy cannot be empty");
         require(bytes(_purchaseEmail).length > 0, "PurchaseEmail cannot be empty");
         require(bytes(_purchaseDate).length > 0, "PurchaseDate cannot be empty");
 
@@ -48,12 +44,11 @@ contract PurchaseBook {
         purchases[purchaseCount] = Purchase({
             ISBN: _ISBN,
             price: _price,
-            purchasedBy: _purchasedBy,
             purchaseEmail: _purchaseEmail,
             purchaseDate: _purchaseDate
         });
 
-        emit ItemPurchased(_ISBN, _price, _purchasedBy, _purchaseEmail, _purchaseDate);
+        emit ItemPurchased(_ISBN, _price, _purchaseEmail, _purchaseDate);
     }
 
     function getTotalPurchaseCount() public view returns (uint256) {
