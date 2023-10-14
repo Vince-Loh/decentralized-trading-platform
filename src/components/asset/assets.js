@@ -160,7 +160,7 @@ function Assets() {
           </div>
         ) : ( // User is not logged in, display register or login section
           <div className="register-container">
-            <h1>Register or Login</h1>
+            <h1 style={{ textAlign: 'center', marginBottom: '20px'}}>Register or Login</h1>
             <Register />
             <Login onSuccessfulLogin={handleLoginSuccess} onPurchaseSuccess={onPurchaseSuccess} />
           </div>

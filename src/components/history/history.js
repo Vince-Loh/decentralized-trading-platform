@@ -93,7 +93,7 @@ function History() {
             </Grid>
             {assets && assets.length > 0 ? (
               // User has transaction history, display it
-              <Box sx={{ flexGrow: 1 }} style={{ paddingTop: '3vh', paddingBottom: '10vh', paddingLeft: 32, paddingRight: 16, backgroundColor: '#222' }}>
+              <Box sx={{ flexGrow: 1 }} style={{ paddingTop: '3vh', paddingBottom: '60vh', paddingLeft: 32, paddingRight: 16, backgroundColor: '#222' }}>
                 <Grid container spacing={0}>
                   {assets.map((asset, index) => (
                     <Grid item xs={12} md={12} lg={12} xl={12} style={{ marginBottom: '2rem', paddingTop: '1vh' }}>
@@ -112,7 +112,7 @@ function History() {
         ) : (
           // User is not logged in, display register or login section
           <div className="register-container">
-            <h1>Register or Login</h1>
+            <h1 style={{ textAlign: 'center', marginBottom: '20px'}}>Register or Login</h1>
             <Register />
             <Login onSuccessfulLogin={handleLoginSuccess} />
           </div>

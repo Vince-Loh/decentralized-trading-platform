@@ -72,6 +72,27 @@
   display: none;
 }
 
+.logout-button {
+  background-color: #2B86C5; 
+  border: none;
+  border-radius: 4px;
+  color: #fff;
+  cursor: pointer;
+  font-size: 16px;
+  padding: 8px 16px;
+  transition: background-color 0.3s;
+  outline: none;
+  box-shadow: none;
+  display: block;
+  width: 100%;
+  text-align: left;
+}
+
+.logout-button:hover {
+  background-color: #1a5a8d; 
+}
+
+
 @media screen and (max-width: 850px){
   .Navbaritems{
     z-index: 99;
