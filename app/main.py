@@ -22,7 +22,7 @@ assert connected, "Failed to connect to the blockchain"
 
 # Blockchain Config ---
 chain_id = 1337 
-contract_address = '0xcfE5C1EBFf5e5ec71c56110e2D62A080bC79648D'
+contract_address = '0x342A925446771D650cFDeA083232a84F211a9fBD'
 
 with open("../dtp_truffle_project/contracts/PurchaseBook.sol", "r") as file:
     bookstore_file = file.read()
