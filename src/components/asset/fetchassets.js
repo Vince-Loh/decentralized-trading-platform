@@ -1,3 +1,18 @@
+/*
+
+Group 21:
+
+Student Name: Vince Loh
+Student ID: 102450160
+
+Student Name: Kyle Barthelson 
+Student ID: 104035705
+
+Student Name: Nial Jones 
+Student ID: 104152769
+
+*/
+
 import axios from 'axios';
 
 export async function fetchAssets() {
@@ -17,11 +32,9 @@ export async function convertToDesiredFormat(books) {
 
   for (const book of books) {
     try {
-      // Fetch additional data for each book
       const bookInfoResponse = await axios.get(`http://127.0.0.1:8000/getBookInfo/${book.ISBN}`);
       const bookInfo = bookInfoResponse.data;
       
-      // Map the data as needed
       const formattedBook = {
         isbn: bookInfo.ISBN,
         price: book.Price,

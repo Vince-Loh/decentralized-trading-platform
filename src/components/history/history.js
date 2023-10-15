@@ -52,7 +52,6 @@ function History() {
 
   useEffect(() => {
     if (isLoggedIn) {
-      // Fetch assets when the component mounts and the user is logged in
       if (userEmail) {
         console.log('history.js fetchAssets call:', userEmail);
         fetchAssets(String(userEmail));
@@ -62,7 +61,6 @@ function History() {
 
   const handleLoginSuccess = (email) => {
     console.log('handleLoginSuccess return');
-
     // Set the session variables
     sessionStorage.setItem('isLoggedIn', 'true');
     sessionStorage.setItem('userEmail', email);
@@ -72,9 +70,7 @@ function History() {
     <>
       <div className="history-container">
         {isLoggedIn ? (
-          // User is logged in
           <div className="history-container">
-            {/* Grid for the title */}
             <Grid container spacing={0} alignItems="center" justifyContent="center">
               <Grid item xs={12} sm={6}>
                 <div className="historyPage-title">
@@ -92,7 +88,6 @@ function History() {
               </Grid>
             </Grid>
             {assets && assets.length > 0 ? (
-              // User has transaction history, display it
               <Box sx={{ flexGrow: 1 }} style={{ paddingTop: '3vh', paddingBottom: '60vh', paddingLeft: 32, paddingRight: 16, backgroundColor: '#222' }}>
                 <Grid container spacing={0}>
                   {assets.map((asset, index) => (
@@ -103,14 +98,12 @@ function History() {
                 </Grid>
               </Box>
             ) : (
-              // User has no transaction history, display a message
               <div className="no-history-message">
                 <p>You have no transaction history.</p>
               </div>
             )}
           </div>
         ) : (
-          // User is not logged in, display register or login section
           <div className="register-container">
             <h1 style={{ textAlign: 'center', marginBottom: '20px'}}>Register or Login</h1>
             <Register />

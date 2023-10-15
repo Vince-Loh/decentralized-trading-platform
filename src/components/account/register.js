@@ -1,3 +1,18 @@
+/*
+
+Group 21:
+
+Student Name: Vince Loh
+Student ID: 102450160
+
+Student Name: Kyle Barthelson 
+Student ID: 104035705
+
+Student Name: Nial Jones 
+Student ID: 104152769
+
+*/
+
 import React, { useState } from 'react';
 import axios from 'axios';
 
@@ -10,7 +25,7 @@ function Register() {
 
   const handleRegister = async () => {
     if (password !== confirmPassword) {
-      // Passwords don't match, display an error and reset password fields
+      // check that the two password fields match so user does not enter incorrect password
       setPasswordsMatch(false);
       setPassword('');
       setConfirmPassword('');
@@ -23,12 +38,11 @@ function Register() {
         password,
       });
 
-      // Handle the response from the server
+      
       if (response.data === 'Account already registered.') {
         setRegistrationResult('Account already registered.');
       } else if (response.data === 'Account registered.') {
         setRegistrationResult('Account registered successfully. Please login.');
-        // You can redirect to a login page or perform other actions here
       }
     } catch (error) {
       console.error('An error occurred:', error);

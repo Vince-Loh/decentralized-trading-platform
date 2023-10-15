@@ -21,7 +21,6 @@ import Typography from '@mui/material/Typography';
 import ButtonBase from '@mui/material/ButtonBase';
 import "./historystyles.css"
 
-// Styling for the image
 const Img = styled('img')({ 
   margin: 'auto',
   display: 'block',

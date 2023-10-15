@@ -1,3 +1,18 @@
+/*
+
+Group 21:
+
+Student Name: Vince Loh
+Student ID: 102450160
+
+Student Name: Kyle Barthelson 
+Student ID: 104035705
+
+Student Name: Nial Jones 
+Student ID: 104152769
+
+*/
+
 import React, { useState } from 'react';
 import axios from 'axios';
 
@@ -8,20 +23,24 @@ function Login({ onSuccessfulLogin }) {
 
   const handleLogin = async () => {
     try {
+      // submit data to login endpoint
       const response = await axios.post('http://127.0.0.1:8000/login', {
         email,
         password,
       });
 
       if (response.data === 'success') {
+        // if login submission worked
         setLoginResult('Login successful.');
         console.log('Login successful -- returning');
 
+        // set session variables to identify logged in state
         console.log(sessionStorage.getItem('isLoggedIn'))
         console.log(sessionStorage.getItem('userEmail'))
 
-        onSuccessfulLogin(email); // Call the prop function when login is successful
+        onSuccessfulLogin(email);
       } else if (response.data === 'failure') {
+        // login did not work
         setLoginResult('Login failed. Please check your credentials.');
       }
     } catch (error) {

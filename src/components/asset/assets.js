@@ -72,7 +72,6 @@ function Assets() {
       <div className="asset-container">
         {isLoggedIn ? (
           <div className="asset-container">
-            {/* Grid for the title */}
             <Grid container spacing={0} alignItems="center" justifyContent="center">
               <Grid item xs={12} sm={6}>
                 <div className="assetsPage-title">
@@ -89,7 +88,7 @@ function Assets() {
                 </div>
               </Grid>
             </Grid>
-            {/* Rest of your component content */}
+            
             <Box
               sx={{
                 flexGrow: 1,
@@ -109,7 +108,6 @@ function Assets() {
                   </Item>
                 </Grid>
               </Grid>
-              {/* Search and filter bar */}
               <div className="search-filter-container">
                 <Grid container spacing={2}>
                   <Grid item xs={12} md={12} lg={12}>

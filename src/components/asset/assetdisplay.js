@@ -1,16 +1,28 @@
+/*
+
+Group 21:
+
+Student Name: Vince Loh
+Student ID: 102450160
+
+Student Name: Kyle Barthelson 
+Student ID: 104035705
+
+Student Name: Nial Jones 
+Student ID: 104152769
+
+*/
+
 import * as React from 'react';
 import { styled } from '@mui/material/styles';
 import Grid from '@mui/material/Grid';
 import Paper from '@mui/material/Paper';
 import Typography from '@mui/material/Typography';
 import ButtonBase from '@mui/material/ButtonBase';
-import Button from '@mui/material/Button'; // Import Button from MUI
-import axios from 'axios'; // Import Axios for making the purchase request
+import Button from '@mui/material/Button'; 
+import axios from 'axios'; 
 import "./assetstyles.css"
-import BookStore from '../../BookStore.json';
-import { useEffect, useState } from 'react';
 
-// Styling for the image
 const Img = styled('img')({
   margin: 'auto',
   display: 'block',
@@ -21,9 +33,8 @@ const Img = styled('img')({
 
 export default function AssetDisplay(props) {
 
-  // Function to handle the purchase
   const handlePurchase = () => {
-
+    // handlePurchase function -- handles "purchase" button click
     const promptedWallet = prompt("Please provide your wallet address (0x.....):");
     if (!promptedWallet) {
       alert("Wallet is required to proceed with the purchase.");
@@ -39,7 +50,6 @@ export default function AssetDisplay(props) {
     purchaseBook(props.isbn, props.price, props.userEmail, promptedWallet, promptedWalletSecret)
     };
 
-  // Function to purchase a book
   async function purchaseBook(isbn, price, userEmail, wallet, walletSecret) {
 
     const purchaseData = {
@@ -49,18 +59,15 @@ export default function AssetDisplay(props) {
       customer_wallet: wallet,
       customer_wallet_secret: walletSecret
     }
-    // Make a request to the backend to initiate the purchase
     axios
-      .post('http://127.0.0.1:8000/purchase', purchaseData) // Adjust the endpoint and payload as needed
+      .post('http://127.0.0.1:8000/purchase', purchaseData)
       .then((response) => {
-        // Handle the response, e.g., update UI or show a success message
         console.log('Purchase successful:', response.data);
         alert(response.data.message);
         window.location.href = '/assets'
         props.onPurchaseSuccess();
       })
       .catch((error) => {
-        // Handle errors, e.g., show an error message
         console.error('Purchase failed:', error);
       });
   }
@@ -101,7 +108,6 @@ export default function AssetDisplay(props) {
               </Typography>
             </Grid>
             <Grid item>
-              {/* Display a Purchase button */}
               <Button variant="contained" onClick={handlePurchase} className="asset-purchase-btn">
                 Purchase Now
               </Button>

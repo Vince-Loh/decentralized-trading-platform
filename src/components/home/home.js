@@ -22,7 +22,6 @@ import * as images from '../images/images';
 function Home() {
     return (
         <div className="home-container">
-            {/* Grid for the Hero-Banner */}
             <Grid container spacing={0} alignItems="center" justifyContent="center">
                 <Grid item xs={12} sm={6}>
                     <div className="hero-banner">
@@ -48,7 +47,6 @@ function Home() {
                     <div className="pop-container">
                         <h2 className='pop-container-title'>Explore Our Platform</h2>
                         <h3 className='pop-container-title'>List of cryptocurrencies that is usable here!</h3>
-                        {/* Grid for the coins*/}
                         <Grid container spacing={4}>
                             <Grid item xs={12} sm={4}>
                                 <div className="coin-container">

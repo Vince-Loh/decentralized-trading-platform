@@ -24,8 +24,6 @@ import Footer from './components/footer/footer.js';
 class App extends Component {
   constructor(props) {
     super(props);
-
-    // Check for the authentication state in session storage
     const isLoggedIn = sessionStorage.getItem('isLoggedIn') === 'true';
     const userEmail = sessionStorage.getItem('userEmail');
 
@@ -40,7 +38,7 @@ class App extends Component {
   }
 
   render() {
-    const { isLoggedIn } = this.state.initialAuthState; // Access isLoggedIn from this.state
+    const { isLoggedIn } = this.state.initialAuthState;
 
     return (
       <div className="App">
