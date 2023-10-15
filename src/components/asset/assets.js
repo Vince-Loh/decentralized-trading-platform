@@ -62,7 +62,8 @@ function Assets() {
   const filteredAssets = assets.filter((asset) => {
     return (
       asset.title.toLowerCase().includes(searchTerm.toLowerCase()) &&
-      (selectedCategory === '' || asset.category === selectedCategory)
+      (selectedCategory === '' || asset.category === selectedCategory) &&
+      (selectedAuthor === '' || asset.author === selectedAuthor)
     );
   });
 
@@ -144,6 +145,7 @@ function Assets() {
                         >
                           <MenuItem value=""><em>None</em></MenuItem>
                           <MenuItem value="Andrzej Sapkowski">Andrzej Sapkowski</MenuItem>
+                          <MenuItem value="Neil de Grasse Tyson">Neil de Grasse Tyson</MenuItem>
                         </Select>
                       </FormControl>
                     </Grid>
